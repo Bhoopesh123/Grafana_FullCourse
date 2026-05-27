@@ -56,8 +56,10 @@ http://localhost:8080
 
 
 # 4. Add scraping information to Prometheus:  
-Paste the contents from "prometheus.yml" from this repo to /etc/prometheus/prometheus.yml 
-Restart Prometheus
+Paste the contents from "prometheus.yml" from this repo to /etc/prometheus/prometheus.yml  
+
+Restart Prometheus  
+
     sudo systemctl restart prometheus 
 
 # 5. Generate some traffic in petclinic application:  
