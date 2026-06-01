@@ -1,0 +1,45 @@
+
+discovery.kubernetes "pods" {
+  role = "pod"
+
+  namespaces {
+    own_namespace = false
+    names = ["metrics"]
+  }
+
+  selectors {
+    role  = "pod"
+  }
+}
+
+prometheus.scrape "pods" {
+  targets    = discovery.kubernetes.pods.targets
+  forward_to = [prometheus.remote_write.grafanacloud.receiver]
+}
+
+prometheus.scrape "node_exporter" {
+        targets = [{
+                __address__ = "10.43.198.224:9100",
+        }]
+        forward_to = [prometheus.remote_write.grafanacloud.receiver]
+        job_name   = "node_exporter"
+}
+
+prometheus.scrape "alloy_metrics" {
+        targets = [{
+                __address__ = "10.43.184.15:12345",
+        }]
+        forward_to = [prometheus.remote_write.grafanacloud.receiver]
+        job_name   = "alloy_metrics"
+}
+
+prometheus.remote_write "grafanacloud" {
+  endpoint {
+    url = "xx"
+
+    basic_auth {
+      username = "xx"
+      password = "xx"
+    }
+  }
+}
