@@ -26,7 +26,7 @@ https://github.com/open-telemetry/opentelemetry-java-instrumentation
 
 Set OTEL Agent Environment Variables  
 
-    export OTEL_EXPORTER_OTLP_TRACES_ENDPOINT=http://localhost:4318/v1/traces
+    export OTEL_EXPORTER_OTLP_TRACES_ENDPOINT=http://localhost:4318/v1/traces 
 
 Start the Petclinic Application
 
