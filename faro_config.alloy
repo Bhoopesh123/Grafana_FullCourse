@@ -1,0 +1,20 @@
+// Grafana Faro Web SDK receiver
+faro.receiver "frontend_app" {
+  server {
+    listen_address = "0.0.0.0"
+    listen_port = 12346
+    cors_allowed_origins = ["*"]
+  }
+
+  output {
+    logs = [loki.process.faro_logs.receiver]
+    traces = [
+      // Traces to ServiceGraph metrics
+      otelcol.connector.servicegraph.default.input,
+      // Traces to SpanMetrics
+      otelcol.processor.transform.spanmetrics.input,
+      // Traces to OTLP endpoint
+      otelcol.processor.batch.default.input,
+    ]
+  }
+}
